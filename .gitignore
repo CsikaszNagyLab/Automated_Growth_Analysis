@@ -1,0 +1,8 @@
+*.pyc
+__pycache__/*.pyc
+__pycache__/*.pyo
+*.pyo
+
+*.png
+output.csv
+calibration_results.json

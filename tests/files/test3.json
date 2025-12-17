@@ -1,0 +1,39 @@
+{
+    "grayscale_transform": [0.299, 0.587, 0.114],
+    "colony_threshold": 0.05,
+    "threshold_skew": 0.2,
+    "circularity_threshold": 0.4,
+    "light_equalization": {
+        "center": [3500, 2500],
+        "radius": 150
+    },
+    "plates": 
+    [
+        {
+            "id": "plate1",
+            "location": [2145, 2087],
+            "size": [1440, 952],
+            "colonies": 
+            [
+                {"location":[570, 304], "descriptor":"A1"},
+                {"location":[672, 200], "descriptor":"A2"},
+                {"location":[780, 820], "descriptor":"A3"},
+                {"location":[1296, 609], "descriptor":"A4"},
+                {"location":[158, 96], "descriptor":"A5"}
+            ],
+            "colony_roi_size": 50
+        },
+        {
+            "id": "plate2",
+            "location": [2198, 151],
+            "size": [1356, 879],
+            "colonies": 
+            [
+                {"location":[631, 81], "descriptor":"A1"},
+                {"location":[418, 485], "descriptor":"A2"},
+                {"location":[1243, 80], "descriptor":"A3"}
+            ],
+            "colony_roi_size": 50
+        }
+    ]
+}
