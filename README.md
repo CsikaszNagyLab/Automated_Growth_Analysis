@@ -27,7 +27,7 @@ This repository contains a complete automated pipeline for high-throughput analy
 - `1_Sample_Preparation/` - Hamilton liquid handling protocols (Venus 4)
 - `2_Image_Acquisition/` - Raspberry Pi scripts for time-lapse photography
 - `3_Image_Processing/` - Contains the python scripts to process the raw acquired images
-- `Microscopy_Protocol/` - Automated microscopy acquisition methods
+- `4_Microscopy_Protocol/` - Automated microscopy acquisition methods
 
 ## 2. Automated Sample Preparation <a name="sampleprep"></a>
 
@@ -45,6 +45,8 @@ These protocols enable systematic analysis of pairwise interactions between mult
 
 ### System Requirements
 
+Hamilton protocols have to be localized to take into account the configuration of the underlying liquid handling system and run environment.
+
 - **Hamilton Microlab STAR/Starlet** liquid handling system
 - **Venus 4** software (version 4.7.0.7744)
 - **Hardware**: 4x 1000µL pipetting heads, CO-RE grippers
@@ -55,10 +57,9 @@ These protocols enable systematic analysis of pairwise interactions between mult
 Automates the preparation of strain mixtures in defined ratios and distributes them into 96-well format.
 
 **Key features**:
-- User-defined mixing ratios via Excel worksheet
-- Customizable plate layouts
+- User-defined mixing ratios and plate layouts via Excel worksheet
 - Automated liquid handling for replicates
-- Simple UI for everyday lab use
+- Simple UI for everyday use
 
 **Files**:
 - `Dispense.hsl` - Main protocol script
@@ -72,10 +73,9 @@ Automates the preparation of strain mixtures in defined ratios and distributes t
 Transfers liquid cultures from 96-well plates onto solid agar media using a custom 96-pin stamping tool.
 
 **Key features**:
-- Custom pinning tool for precise inoculation
-- Multiple immersion to prevent bubble formation
 - Processes 3 plates per cycle
 - Excel-based worklist configuration
+- Simple UI for everyday use
 
 **Files**:
 - `colony_screening.hsl` - Main protocol script
@@ -238,27 +238,5 @@ BibTeX entry:
 ```
 
 ## 6. Licence <a name="license"></a>
-
-MIT License
-
-Copyright (c) 2025 Csikász-Nagy Lab
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 
 see [Licence File](LICENSE)
