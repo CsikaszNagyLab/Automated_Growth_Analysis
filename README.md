@@ -1,6 +1,25 @@
 # Automated Yeast Strain Interaction Analysis Workflow
 
-## Overview
+##Table of Contents
+
+ [1. Overview](#overview)
+ 
+ [2. Automated Sample Preparation](#sampleprep)
+ 
+ [3. Image Acquisition](#acquisition)
+ 
+ [4. Image Processing of Raw Images](#imageproc)
+ 
+ [5. Citation](#citation)
+ 
+ [6. License](#license)
+
+
+ ## 2. Automated Sample Preparation <a name="sampleprep"></a>
+
+
+## 1. Overview <a name="overview"></a>
+
 
 ![Workflow Overview](workflow_overview.png)
 
@@ -13,7 +32,7 @@ This repository contains a complete automated pipeline for high-throughput analy
 - `3_Image_Processing/` - Contains the python scripts to process the raw acquired images
 - `Microscopy_Protocol/` - Automated microscopy acquisition methods
 
-## Automated Sample Preparation
+## 2. Automated Sample Preparation <a name="sampleprep"></a>
 
 
 Automated Hamilton liquid handling protocols for high-throughput microbial interaction studies on solid media.
@@ -70,11 +89,7 @@ Transfers liquid cultures from 96-well plates onto solid agar media using a cust
 - `Manual/Plating_Manual.odp` - User manual (presentation format)
 
 
-
-
-
-
-## Image Acquisition
+## 3. Image Acquisition <a name="acquisition"></a>
 
 ### Setting up RaspbianOS
 
@@ -130,7 +145,7 @@ Edit acquire_timeseries.py to set:
 
 
 
-## Image Processing of Raw Images
+## 4. Image Processing of Raw Images <a name="imageproc"></a>
 
 
 ### 1. Calibration with `consoleCalibrator.py`
@@ -205,9 +220,27 @@ Edit acquire_timeseries.py to set:
 
 This workflow ensures accurate calibration and analysis of your cell colony growth experiment.
 
-## Licence
+## 5. Citation <a name="citation"></a>
 
+If you use this workflow in your research, please cite:
 
+**[Title will be added upon publication]**  
+Csaba Nagy, [Co-authors to be added]  
+*[Journal name]*, [Year]  
+DOI: [to be added]
+
+BibTeX entry:
+```bibtex
+@article{nagy2025yeast,
+  title={[Title to be added]},
+  author={Nagy, Csaba and [Co-authors]},
+  journal={[Journal name]},
+  year={2025},
+  doi={[DOI to be added]}
+}
+```
+
+## 6. Licence <a name="license"></a>
 
 MIT License
 
