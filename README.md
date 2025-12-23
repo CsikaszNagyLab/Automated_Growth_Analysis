@@ -18,10 +18,9 @@
 
 ## 1. Overview <a name="overview"></a>
 
-
 ![Workflow Overview](workflow_overview.png)
 
-This repository contains a complete automated pipeline for high-throughput analysis of microbial interactions on solid media. The workflow integrates three modular components: (1) **Sample Preparation** - Hamilton liquid handling protocols for automated strain mixing and plate inoculation, (2) **Time-lapse Imaging** - Raspberry Pi-controlled imaging station for colony growth monitoring, (3) image processing workflows to process the acquired images.(4)**Microscopy Analysis** - Automated fluorescence microscopy protocols to quantify strain distribution within mixed colonies. Together, these tools enable systematic investigation of pairwise strain interactions across different environmental conditions with minimal manual intervention.
+This repository contains a complete automated pipeline for high-throughput analysis of microbial interactions on solid media. The workflow integrates three modular components: (1) **Sample Preparation** - Hamilton liquid handling protocols for automated strain mixing and plate inoculation, (2) **Time-lapse Imaging** - Raspberry Pi-controlled imaging station for colony growth monitoring, (3) image processing workflows to process the acquired images.(4) **Microscopy Analysis** - Automated fluorescence microscopy protocols to quantify strain distribution within mixed colonies. Together, these tools enable systematic investigation of pairwise strain interactions across different environmental conditions with minimal manual intervention.
 
 ### Repository Structure
 
