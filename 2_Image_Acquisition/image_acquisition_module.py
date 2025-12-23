@@ -3,32 +3,23 @@ import os
 from PIL import Image
 import PIL #Install pillow
 import subprocess
-from sh import gphoto2 as gp #Install using apt
+from sh import gphoto2 as gp 
 from time import sleep
-import RPi.GPIO as GPIO # /boot/firmware/config.txt last lines: //dtoverlay=w1-gpio, gpiopin=2//dtoverlay=w1-gpio, gpiopin=3//dtoverlay=w1-gpio, gpiopin=4
-#dtoverlay=w1-gpio, gpiopin=2, gpiopin=3, gpiopin=4
+import RPi.GPIO as GPIO 
 
-from w1thermsensor import W1ThermSensor, Sensor #Install using apt
-import adafruit_dht as Adafruit_DHT #pip3 install Adafruit_DHT --install-option="--force-pi"
+from w1thermsensor import W1ThermSensor, Sensor 
+import adafruit_dht as Adafruit_DHT 
 
+# Hardware configuration requires /boot/firmware/config.txt to contain:
+# dtoverlay=w1-gpio,gpiopin=2
+# dtoverlay=w1-gpio,gpiopin=3
+# dtoverlay=w1-gpio,gpiopin=4
 
-#REMEMBER TO SET EXPERIMENT NAME!!!!!!!!
-measurementId = "HandsOnDeck"
+    
+##################################################################################################
+##############################Hardware: Lighting and Temperature #################################
+##################################################################################################
 
-temperatureSamplingTime = 300#300   # seconds
-imageSamplingTime = 7200#1800        # seconds
-numImages =800#700#350
-
-imagesTaken = 0
-
-lastTemperatureTime = datetime.fromtimestamp(0)
-lastImageTime = datetime.fromtimestamp(0)
-
-dataBuffer = []
-
-outputFile = "data.csv"
-clearCommand = ["--folder", "/store_00010001/DCIM/103D3200", \
-                "-R", "--delete-all-files"]
 
 def killGphotoProcess():
     p =subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
@@ -64,9 +55,8 @@ def setCameraConfig():
     gp(['--set-config', 'exposurecompensation=15']) # off
     #gp(['--set-config', 'imagequality="JPEG Basic"']) # Normal/Basic/Fine currently breaks code
     gp(['--set-config', 'capturemode=0']) # Single Shot
-def ToggleLight(on):
-    #print("Lights turned " + ("on" if on else "off"))
-    GPIO.output(18, on)
+
+
     
 def AppendBufferToFile():
     global dataBuffer
@@ -79,6 +69,40 @@ def AppendBufferToFile():
         
     dataBuffer = []
     file.close()
+
+ 
+    
+def CreatePhoto(timenow):
+    ToggleLight(True)
+    sleep(1)
+    captureImage()
+    renameFiles(timenow.strftime("%Y-%m-%d %H:%M:%S"))
+    ToggleLight(False)
+    
+    global lastImageTime
+    lastImageTime = datetime.now()
+    
+    AppendBufferToFile()
+    
+##################################################################################################
+##############################Hardware: Lighting and Temperature #################################
+##################################################################################################
+
+def find_sensors():
+    sensors = []
+    for sensor in W1ThermSensor.get_available_sensors():
+        if sensor.type == Sensor.DS18B20:
+            sensors.append(sensor)
+    return sensors
+
+def read_temp(sensor):
+    temp_C = sensor.get_temperature()
+    return temp_C
+
+   
+def ToggleLight(on):
+    #print("Lights turned " + ("on" if on else "off"))
+    GPIO.output(18, on)
 
 def MeasureTemperature(timenow):
     global temperatureSensors
@@ -105,19 +129,12 @@ def MeasureTemperature(timenow):
     
     global dataBuffer
     dataBuffer.append(Data)
-    
-def CreatePhoto(timenow):
-    ToggleLight(True)
-    sleep(1)
-    captureImage()
-    renameFiles(timenow.strftime("%Y-%m-%d %H:%M:%S"))
-    ToggleLight(False)
-    
-    global lastImageTime
-    lastImageTime = datetime.now()
-    
-    AppendBufferToFile()
-    
+
+
+##################################################################################################
+####################################### Helper functions #########################################
+##################################################################################################
+
 def CreateMeasurementFolder(measurementId, measurementDir=""):
     if measurementDir =="":
         save_location = "/home/usr/Desktop/Photos/measurements/" + measurementId
@@ -135,17 +152,6 @@ def CreateMeasurementFolder(measurementId, measurementDir=""):
     os.chdir(save_location)
     print(save_location)
 
-def find_sensors():
-    sensors = []
-    for sensor in W1ThermSensor.get_available_sensors():
-        if sensor.type == Sensor.DS18B20:
-            sensors.append(sensor)
-    return sensors
-
-def read_temp(sensor):
-    temp_C = sensor.get_temperature()
-    return temp_C
-
 def ReportStatus(timenow):
     print("###################################################")
     print("Status at " + timenow.strftime("%Y-%m-%d %H:%M:%S"))
@@ -161,40 +167,3 @@ def ReportStatus(timenow):
         print("Humidity: "+ str(lastLine[5]) + "%")
     except:
         print("Error in temperature print")
-############################################################
-# INITIALIZE MEASUREMENT
-
-measurementDir=os.path.dirname(os.path.realpath(__file__))+"/"
-
-while measurementId == "":
-    userinput = input('Name the measurement\n')
-    measurementId = "".join(c for c in userinput if c.isalpha() or c.isdigit() or c == '_')
-
-CreateMeasurementFolder(measurementId, measurementDir)
-outputFile = "data_"+measurementId+".csv"
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(18, GPIO.OUT)
-
-killGphotoProcess()
-setCameraConfig()
-gp(clearCommand)
-
-temperatureSensors = find_sensors()
-
-# MEASUREMENT
-while imagesTaken < numImages:
-    timenow = datetime.now()
-    temperatureSeconds = (timenow - lastTemperatureTime).total_seconds()
-    imageSeconds = (timenow - lastImageTime).total_seconds()
-    
-    if temperatureSeconds > temperatureSamplingTime:
-        MeasureTemperature(timenow)
-        ReportStatus(timenow)
-    
-    if imageSeconds > imageSamplingTime:
-        CreatePhoto(timenow)
-        imagesTaken += 1
-            
-            
