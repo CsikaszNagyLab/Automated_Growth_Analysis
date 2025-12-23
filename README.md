@@ -257,6 +257,6 @@ BibTeX entry:
 }
 ```
 
-## 7. Licence <a name="license"></a>
+## 7. License <a name="license"></a>
 
-see [Licence File](LICENSE)
+see [License File](LICENSE)
