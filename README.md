@@ -223,7 +223,7 @@ This workflow ensures accurate calibration and analysis of your cell colony grow
 If you use this workflow in your research, please cite:
 
 **[Title will be added upon publication]**  
-Csaba Nagy, [Co-authors to be added]  
+[Authors to be added]  
 *[Journal name]*, [Year]  
 DOI: [to be added]
 
