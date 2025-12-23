@@ -26,4 +26,28 @@ sudo nano /boot/firmware/config.txt
 4. **Reboot to apply changes**
 sudo reboot
 
-5. Copy script file into a directory
+
+
+## Installing and Using the Script
+1. Copy image acquisition script files from the project repo:
+- image_acquisition_module.py
+- acquire_timeseries.py
+
+2. Verify hardware connections using terminal
+- Check temperature sensors
+"ls /sys/bus/w1/devices/"
+
+- Check camera
+"gphoto2 --auto-detect"
+
+3. Configure measurement settings
+Edit acquire_timeseries.py to set:
+- measurementId: Experiment name
+- temperatureSamplingTime: Temperature measurement interval (seconds)
+- imageSamplingTime: Image capture interval (seconds)
+- numImages: Total number of images to capture
+
+4. Run the script
+'python3 acquire_timeseries.py'
+
+5. Follow progress in terminal output!
