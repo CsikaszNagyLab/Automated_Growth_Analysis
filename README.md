@@ -1,6 +1,6 @@
 # Automated Yeast Strain Interaction Analysis Workflow
 
-##Table of Contents
+## Table of Contents
 
  [1. Overview](#overview)
  
