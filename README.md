@@ -15,8 +15,6 @@
  [6. License](#license)
 
 
- ## 2. Automated Sample Preparation <a name="sampleprep"></a>
-
 
 ## 1. Overview <a name="overview"></a>
 
