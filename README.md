@@ -207,4 +207,4 @@ This workflow ensures accurate calibration and analysis of your cell colony grow
 
 ## Licence
 
-[a relative link](LICENSE)
+[Licence file:](LICENSE)
