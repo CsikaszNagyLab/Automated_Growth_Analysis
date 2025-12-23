@@ -9,11 +9,12 @@
  [3. Image Acquisition](#acquisition)
  
  [4. Image Processing of Raw Images](#imageproc)
- 
- [5. Citation](#citation)
- 
- [6. License](#license)
 
+ [5. Automated Microscopy Protocols](#microscopy)
+ 
+ [6. Citation](#citation)
+ 
+ [7. License](#license)
 
 
 ## 1. Overview <a name="overview"></a>
@@ -217,7 +218,26 @@ Edit acquire_timeseries.py to set:
 
 This workflow ensures accurate calibration and analysis of your cell colony growth experiment.
 
-## 5. Citation <a name="citation"></a>
+## 5. Automated Microscopy Protocols  <a name="microscopy"></a>
+
+Nikon NIS-Elements JOBS protocol for automated acquisition of microbial colony biofilms. The JOBS module enables batch processing of multiple positions across plates with consistent acquisition settings.
+
+### System Requirements
+
+#### Microscope System:
+Nikon Microscope that is equipped with:
+
+- Motorized filter turret (for fluorescent samples)
+- Motorized stage
+- Motorized Z drive
+  
+For imaging we use a Nikon CFI Plan Apochromat 2X (NA 0.1) which has a large field of view.
+
+#### Software:
+NIS-Elements AR version 5.3 or higher with JOBS module.
+
+
+## 6. Citation <a name="citation"></a>
 
 If you use this workflow in your research, please cite:
 
@@ -237,6 +257,6 @@ BibTeX entry:
 }
 ```
 
-## 6. Licence <a name="license"></a>
+## 7. Licence <a name="license"></a>
 
 see [Licence File](LICENSE)
