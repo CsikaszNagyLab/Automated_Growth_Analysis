@@ -1,4 +1,4 @@
-# Experiment Analysis Workflow Manual
+# Image Acquisition Script
 
 ## Setting up RaspbianOS
 
