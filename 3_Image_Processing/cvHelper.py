@@ -31,6 +31,9 @@ def find_row_col_peaks(roi, threshold=25):
     starts = np.where(startsMask)
     ends = np.where(endsMask)
 
+    while ends[0][0] < starts[0][0]:
+        ends = (ends[0][1:],)
+
     rowPeaks = []
     for start, end in zip(starts[0], ends[0]):
         if end > start:
@@ -44,6 +47,9 @@ def find_row_col_peaks(roi, threshold=25):
     ends = np.concatenate((endsMask, [colsAboveThreshold[-1]]))
     starts = np.where(startsMask)
     ends = np.where(endsMask)
+
+    while ends[0][0] < starts[0][0]:
+        ends = (ends[0][1:],)
 
     colPeaks = []
     for start, end in zip(starts[0], ends[0]):

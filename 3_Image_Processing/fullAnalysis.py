@@ -41,13 +41,13 @@ if __name__ == "__main__":
         sys.exit(1)
     
     with open(output_file, 'w') as out_file:
-        out_file.write("Image,PlateID,ColonyID,ColonyDescriptor,Area,Circularity\n")
+        out_file.write("Image,PlateID,ColonyID,ColonyDescriptor,Area,Circularity,CenterDistance\n")
         i = 0
         for image_path in images:
             i += 1
             print(f"Processing image: {image_path}")
             results = analyzePlate.analyze_single_image(image_path, configuration)
             for result in results:
-                out_file.write(f"{result.image_name},{result.plate_id},{result.colony_id},{result.colony_descriptor},{result.area},{result.circularity}\n")
+                out_file.write(f"{result.image_name},{result.plate_id},{result.colony_id},{result.colony_descriptor},{result.area},{result.circularity},{result.centerDistance}\n")
 
             print(f"Image {i}/{len(images)} processed.")

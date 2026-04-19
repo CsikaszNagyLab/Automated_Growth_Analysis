@@ -139,6 +139,7 @@ class CalibratorStateMachine:
                     curr = layout.Layout(os.path.join(self.folder, filename))
                     if (curr.valid):
                         self.layouts.append(curr)
+        images.sort()
 
         print(f"Number of image files in '{self.folder}': {len(images)}")
 
@@ -657,6 +658,7 @@ class CalibratorStateMachine:
             plate_id = input("Enter plate index to adjust: ")
             if not plate_id.isnumeric() or int(plate_id) < 1 or int(plate_id) > len(self.seeds):
                 print("Invalid input")
+                return
             else:
                 plate_id = int(plate_id) - 1
             left, top, right, bottom = self.plate_rectangles[plate_id]

@@ -7,9 +7,11 @@ import cvHelper
 
 if __name__ == "__main__":
     json_path = "./tests/files/experiment/calibration_results.json"
+    json_path = os.path.join(os.path.dirname(__file__), "files", "experiment", "calibration_results.json")
     configuration = analyzePlate.read_configuration(json_path)
 
     image_path = "./tests/files/experiment/2024-09-01 23_19_05.JPG"
+    image_path = os.path.join(os.path.dirname(__file__), "files", "experiment", "2024-09-01 23_19_05.JPG")
     image = analyzePlate.read_image(image_path, configuration)
     #analyzePlate.show_image(image, "Grayscale Image")
 

@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 import analyzePlate
 
 if __name__ == "__main__":
-    image_path = "./tests/files/APPEAR.JPG"
+    image_path = os.path.join(os.path.dirname(__file__), "files", "APPEAR.JPG")
 
     configuration = analyzePlate.Configuration()
     configuration.grayscale_transform = [1, 0, 0]

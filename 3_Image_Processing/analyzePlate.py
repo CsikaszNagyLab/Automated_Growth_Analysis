@@ -89,9 +89,10 @@ def show_image(image, title="Image"):
 
 def equalize_light(image, configuration):
     radius = configuration.light_equalization.radius
-    blurred_image = image
+    blurred_image = image.copy()
 
     downscaled = False
+    original_size = image.shape
 
     if radius > 10:
         downscale_factor = pow(2, math.ceil(math.log2(radius / 10)))
@@ -101,9 +102,10 @@ def equalize_light(image, configuration):
     
     blurred_image = cv2.GaussianBlur(blurred_image, (radius * 2 + 1, radius * 2 + 1), 0)
     if downscaled:
-        blurred_image = cv2.resize(blurred_image, (0, 0), fx=downscale_factor, fy=downscale_factor)
+        blurred_image = cv2.resize(blurred_image, (original_size[1], original_size[0]))
+    equalized = cv2.subtract(blurred_image, image)
 
-    return cv2.subtract(blurred_image, image)
+    return equalized
 
 def segment_colony(image, configuration):
     if np.issubdtype(image.dtype, np.integer):
@@ -231,13 +233,14 @@ def compute_colony_properties(mask):
     return area, circularity
 
 class AnalysisResult:
-    def __init__(self, image_name, plate_id, colony_id, colony_descriptor, area, circularity):
+    def __init__(self, image_name, plate_id, colony_id, colony_descriptor, area, circularity, centerDistance = 0):
         self.image_name = image_name
         self.plate_id = plate_id
         self.colony_id = colony_id
         self.colony_descriptor = colony_descriptor
         self.area = area
         self.circularity = circularity
+        self.centerDistance = centerDistance
 def analyze_single_image(image_path, configuration):
     image = read_image(image_path, configuration)
     image = equalize_light(image, configuration)
@@ -254,5 +257,7 @@ def analyze_single_image(image_path, configuration):
             area, circularity = compute_colony_properties(mask)
             if area > 0 and circularity > configuration.circularity_threshold:
                 colony_descriptor = configuration.plates[plateId].colony_descriptors[colonyId] if colonyId < len(configuration.plates[plateId].colony_descriptors) else f"Colony_{colonyId}"
-                results.append(AnalysisResult(os.path.basename(image_path), plateId, colonyId, colony_descriptor, area, circularity))
+                colonyCenter = np.array(configuration.plates[plateId].colony_locations[colonyId]) + np.array(configuration.plates[plateId].location)
+                centerDistance = np.linalg.norm(colonyCenter - np.array([image.shape[1], image.shape[0]]) / 2)
+                results.append(AnalysisResult(os.path.basename(image_path), plateId, colonyId, colony_descriptor, area, circularity, centerDistance))
     return results
